@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Story;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
 
 class StoryController extends Controller
 {
@@ -16,7 +17,8 @@ class StoryController extends Controller
     public function index()
     {
         //
-        return view('stories.index');
+        $stories = Story::latest()->paginate(6);
+        return view('stories.index', compact('stories'));
     }
 
     /**
@@ -37,9 +39,17 @@ class StoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // this is code clean boy
+        $attr = request()->validate([
+            'title' => 'required|min:3',
+            'body'  => 'required'
+        ]);
+        $attr['slug'] = \Str::slug(request('title'));
+        Story::create($attr);
+
+        return redirect('/story/my-stories')->with('success','Tambah cerita Berhasil');
     }
 
     /**
@@ -62,6 +72,7 @@ class StoryController extends Controller
     public function edit(Story $story)
     {
         //
+        return view('stories.edit', compact('story'));
     }
 
     /**

@@ -9,9 +9,6 @@
 
     <title>{{ $title ?? 'CeritaKalian' }}</title>
 
-    {{-- jquery --}}
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
     {{--   select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -22,8 +19,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
- 
 
 
     <!-- Styles -->
@@ -36,18 +31,18 @@
         @include('layouts.navigation')
         
         <main class="py-4">
+            @include('alert')
             @yield('content')
         </main>
     </div>
 
+    {{-- jquery --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     {{-- select2 --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-            CKEDITOR.replace( 'article-ckeditor' );
-        });
+        CKEDITOR.replace( 'editor' );
     </script>
 
 </body>

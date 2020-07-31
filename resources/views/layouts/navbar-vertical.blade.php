@@ -2,10 +2,10 @@
     <b>Master</b>
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link{{ request()->is('dashboard') ? ' btn-primary' : '' }}" href="{{ route('home') }}">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Ceritaku</a>
+            <a class="nav-link{{ request()->is('story/my-stories') ? ' btn-primary' : '' }}" href="{{ route('stories.index') }}">Ceritaku</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Komentar</a>

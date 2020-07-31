@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-10">
             
-            <h2>Tambah Cerita Kalian</h2>
+            <h2>Edit Cerita Kalian</h2>
             
             <div class="row ">
                 <div class="col-md-9">

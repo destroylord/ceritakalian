@@ -8,7 +8,7 @@
             <a class="nav-link{{ request()->is('story/my-stories') ? ' btn-primary' : '' }}" href="{{ route('stories.index') }}">Ceritaku</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Komentar</a>
+            <a class="nav-link{{ request()->is('trash') }}" href="{{ route('stories.trash') }}">Tong Sampah</a>
         </li>
     </ul>
 </nav>

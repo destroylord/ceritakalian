@@ -14,7 +14,7 @@
                 <div class="col-md-9">
                     <form action="/story/store" method="POST">
                         @csrf
-                        @include('stories.partials.form-control')
+                        @include('stories.partials.form-control', ['submit' => 'Post'])
                     </form>
             </div>
         </div>

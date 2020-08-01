@@ -1,18 +1,12 @@
-@extends('layouts.app', ['title' => 'Tambah Cerita'])
+@extends('layouts.app', ['title' => 'Tong Sampah'])
 
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            
-        </div>
         <div class="col-md-2">
             @include('layouts.navbar-vertical')
         </div>
         <div class="col-md-10">
-            <a href="{{ route('stories.create') }}" class="btn btn-sm btn-primary">Tambah Cerita</a>
-            
-
             <div class="row mt-3">
                 @forelse ($stories as $story)
                 <div class="col-md-4 mt-2">
@@ -52,13 +46,13 @@
                 </div> --}}
                 @empty 
                     <div class="alert alert-info">
-                        <b>Maaf!!</b> <small>Story anda masih kosong</small>
+                        <b>Maaf!!</b> <small>Story tidak ada di tong sampah</small>
                     </div>
                 @endforelse
             </div>
             
             <br>
-            {{ $stories->links() }}
+           
 
         </div>
     </div>

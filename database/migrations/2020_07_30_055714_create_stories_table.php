@@ -19,6 +19,7 @@ class CreateStoriesTable extends Migration
             $table->string('slug');
             $table->text('body');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

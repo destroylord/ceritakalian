@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Story;
+use App\Http\Requests\StoryRequest;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\New_;
 
 class StoryController extends Controller
 {
@@ -29,7 +29,7 @@ class StoryController extends Controller
     public function create()
     {
         //
-        return view('stories.create');
+        return view('stories.create', ['story' => New Story]);
        
     }
 
@@ -39,13 +39,11 @@ class StoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoryRequest $request)
     {
+        $attr = $request->all();
+
         // this is code clean boy
-        $attr = request()->validate([
-            'title' => 'required|min:3',
-            'body'  => 'required'
-        ]);
         $attr['slug'] = \Str::slug(request('title'));
         Story::create($attr);
 
@@ -61,6 +59,7 @@ class StoryController extends Controller
     public function show(Story $story)
     {
         //
+        return view('stories.show',compact('story'));
     }
 
     /**
@@ -82,9 +81,15 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Story $story)
+    public function update(StoryRequest $request,  Story $story)
     {
-        //
+
+        $attr = $request->all();
+        // tidak harus mengupdate slug
+
+        $story->update($attr);
+
+        return redirect('story/my-stories')->with('success','Ceritaku berhasil diupdate');
     }
 
     /**
@@ -95,6 +100,15 @@ class StoryController extends Controller
      */
     public function destroy(Story $story)
     {
-        //
+        $story->delete();
+
+        return back()->with('danger','cerita telah dihapus');
+    }
+    public function trash()
+    {
+        // menampilkan data yang di softdeletes
+        $stories = Story::onlyTrashed()->get();
+
+        return view('stories.trash', compact('stories'));
     }
 }

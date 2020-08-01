@@ -27,7 +27,7 @@
     <div class="form">
         <div class="form-group ">
             <label for="inputCity">Ceritakan sedikit apa yang kalian pernah alami?</label>
-            <textarea name="body" id="editor"> {{ old('body' ?? $story->body) }}</textarea>
+            <textarea name="body" id="editor"> {!! Request::old('body', $story->body) !!}</textarea>
         @error('body')
             <small class="invalid-feedback">
                 {{ $message }}
@@ -35,7 +35,7 @@
         @enderror
         </div>
     </div>
-        <button type="submit" class="btn btn-primary btn-block">Post</button>
+        <button type="submit" class="btn btn-primary btn-block">{{ $submit ?? 'update' }}</button>
     </div>
     <div class="col-md-3">
     {{-- <div class="form-group">

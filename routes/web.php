@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
+// Master
 // story
 Route::group(['prefix' => 'story' , 'middleware' => 'auth'], function () {
     Route::get('{story:slug}/show', 'StoryController@show');
@@ -31,6 +32,11 @@ Route::group(['prefix' => 'story' , 'middleware' => 'auth'], function () {
     Route::get('{story:slug}/deletebyOne','StoryController@deletebyOne');
     Route::get('deleteall','StoryController@deleteall');
 });
+
+// setting
+Route::get('setting/profil','UserController@edit')->name('profil');
+Route::patch('setting/profil','UserController@update');
+Route::get('setting/change-password','UserController@changePassword')->name('setting.password');
 
 
 // Route::get('/', function () {

@@ -36,11 +36,14 @@ Route::group(['prefix' => 'story' , 'middleware' => 'auth'], function () {
 // setting
 Route::get('setting/profil','UserController@edit')->name('profil');
 Route::patch('setting/profil','UserController@update');
-Route::get('setting/change-password','UserController@changePassword')->name('setting.password');
+// password
+Route::get('setting/change-password','UserController@changePasswordForm')->name('setting.password');
+Route::post('setting/changes-password','UserController@changePassword');
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 

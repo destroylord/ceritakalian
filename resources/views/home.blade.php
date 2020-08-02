@@ -7,7 +7,13 @@
             @include('layouts.navbar-vertical')
         </div>
         <div class="col-md-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam iusto magnam vero sit aliquam aspernatur asperiores exercitationem perferendis expedita similique consequuntur, architecto, ducimus veritatis excepturi ab voluptatem, facilis at rem?
+            <div class="card border-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Header</div>
+                    <div class="card-body text-primary">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+            </div>
         </div>
     </div>
 </div>

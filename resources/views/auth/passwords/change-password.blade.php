@@ -6,19 +6,30 @@
         <div class="col-md-2">
             @include('layouts.navbar-vertical')
         </div>
-        <div class="col-md-10">            
+        <div class="col-md-10">
             <div class="row ">
                 <div class="col-md-9">
-                    <form>
+                    <form action="/setting/changes-password" method="POST">
+                        @csrf
                         <div class="form-group">
-                            <label for="password lama">Password lama</label>
-                            <input id="password lama" class="form-control" type="password" name="passwordold">
+                            <label for="password">Password Saat ini</label>
+                            <input id="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror" type="password">
+                            @error('current_password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <label for="password baru">Password baru</label>
-                            <input id="password baru" class="form-control" type="password" name="passwordold">
-                            <label for="">Change Password</label>
-                            <input id="change-password" class="form-control" type="password" name="passwordold">
+                            <input id="password baru" name="new_password" class="form-control @error('new_password') is-invalid @enderror" type="password">
+                            @error('new_password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <label for="">Konfirmasi Password baru</label>
+                            <input id="password_confirmation" class="form-control" type="password" name="password_confirmation">
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
                       </form>
                 </div>
             </div>

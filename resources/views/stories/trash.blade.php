@@ -7,48 +7,43 @@
             @include('layouts.navbar-vertical')
         </div>
         <div class="col-md-10">
-            <div class="row mt-3">
+            <a href="/story/restoreall" class="btn btn-primary btn-sm">Kembalikan semua</a>
+            <a href="/story/deleteall" class="btn btn-danger btn-sm">Hapus permanen semuanya</a>
+
+            
+            <table class="table mt-2 table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Judul</th>
+                    <th scope="col">Deskripsi</th>
+                    <th scope="col">delete_at</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
                 @forelse ($stories as $story)
-                <div class="col-md-4 mt-2">
-                    <div class="card h-100">
-                        <div class="card-body">
-                          <h5 class="card-title">{{ $story->title }}</h5>
-                          {{-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> --}}
-                          <p class="card-text">{!! Str::limit($story->body, 250, '...') !!}</p>
-                          <p class="card-text"><small class="text-muted">Last updated {{ $story->created_at->diffForHumans() }}</small></p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="{{ $story->slug }}/edit" class="card-link ">Edit</a>
-                            <form action="/story/{{ $story->slug }}/delete" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                            </form>
-                            <a href="{{ $story->slug }}/show" class="card-link">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                {{-- <div class="col-md-4">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                </div> --}}
-                @empty 
-                    <div class="alert alert-info">
-                        <b>Maaf!!</b> <small>Story tidak ada di tong sampah</small>
-                    </div>
-                @endforelse
+                  <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{ $story->title }}</td>
+                    <td>{!! Str::limit($story->body, 80, '...') !!}</td>
+                    <td>{{ $story->deleted_at->format('d/m/y') }}</td>
+                    <td>
+                        <a href="{{ $story->slug }}/restore" class="btn btn-success btn-sm">Restore</a>
+                        <a href="{{ $story->slug }}/deletebyOne" class="btn btn-danger btn-sm">Hapus</a>
+                    </td>
+                  </tr>
+                  @empty 
+                  <div class="alert alert-info">
+                      <b>Maaf!!</b> <small>Story tidak ada di tong sampah</small>
+                  </div>
+                 @endforelse
+                </tbody>
+            </table>
+            {{ $stories->links() }}
+
+            Jumlah : {{ $stories->count() }}
+
             </div>
             
             <br>

@@ -107,8 +107,32 @@ class StoryController extends Controller
     public function trash()
     {
         // menampilkan data yang di softdeletes
-        $stories = Story::onlyTrashed()->get();
+        $stories = Story::onlyTrashed()->paginate(10);
+        $count = Story::count();
+        return view('stories.trash', compact('stories','count'));
+    }
 
-        return view('stories.trash', compact('stories'));
+    public function restore(Story $story)
+    {
+        dd($story);
+    }
+
+    public function restoreall()
+    {
+        $story = Story::onlyTrashed();
+        $story->restore();
+
+        return back();
+    }
+    public function deletebyOne(Story $story)
+    {
+        dd($story);
+    }
+    public function deleteall()
+    {
+        $story = Story::onlyTrashed();
+        $story->forceDelete();
+
+        return back()->with('warning','Semua cerita telah terhapus secara permanen');
     }
 }

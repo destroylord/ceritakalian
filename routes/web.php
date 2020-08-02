@@ -22,11 +22,19 @@ Route::group(['prefix' => 'story' , 'middleware' => 'auth'], function () {
     Route::delete('{story:slug}/delete','StoryController@destroy');
     // tong sampah
     Route::get('trash','StoryController@trash')->name('stories.trash');
+
+    // restore
+    Route::get('{story:slug}/restore','StoryController@restore');
+    Route::get('restoreall','StoryController@restoreall');
+
+    // hapus
+    Route::get('{story:slug}/deletebyOne','StoryController@deletebyOne');
+    Route::get('deleteall','StoryController@deleteall');
 });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 

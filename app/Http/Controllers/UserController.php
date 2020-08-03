@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 
 use App\User;
-use Hash;
 use App\Http\Requests\UserRequest;
-use Illuminate\Cache\RetrievesMultipleKeys;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash as FacadesHash;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -52,26 +51,26 @@ class UserController extends Controller
     public function changePassword(Request $request)
     {
 
+        // return $request->all();
+
         $this->validate($request,[
             'current_password' => 'required',
-            'new_password'   => 'required|min:6|confirmated'
+            'password'   => 'required|min:6|confirmed'
         ]);
 
         $old_password_from_db = Auth::user()->password;
+        
         $user_id = Auth::user()->id;
         
-        if (Hash::check($request->input('old_password'), $old_password_from_db)) {
+        if (Hash::check($request->current_password, $old_password_from_db)) {
             
             $user = User::find($user_id);
 
-            $user->password = Hash::make($request->input('new_password'));
+            $user->password = Hash::make($request->password);
 
-            if ($user->save()) {
-                return back()->with('success', 'Password berhasil di ganti');    
-            }else{
-                return back()->with('danger', 'Password lama invalid');
-            }
+            $user->save();
 
+            return back()->with('success', 'Password berhasil di ganti');
         }else{
             return back()->with('danger', 'Password lama invalid');
         }

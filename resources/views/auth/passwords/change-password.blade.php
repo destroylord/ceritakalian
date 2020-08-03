@@ -20,8 +20,8 @@
                                 </div>
                             @enderror
                             <label for="password baru">Password baru</label>
-                            <input id="password baru" name="new_password" class="form-control @error('new_password') is-invalid @enderror" type="password">
-                            @error('new_password')
+                            <input id="password baru" name="password" class="form-control @error('password') is-invalid @enderror" type="password">
+                            @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

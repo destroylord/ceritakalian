@@ -29,8 +29,8 @@
                     <td>{!! Str::limit($story->body, 80, '...') !!}</td>
                     <td>{{ $story->deleted_at->format('d/m/y') }}</td>
                     <td>
-                        <a href="{{ $story->slug }}/restore" class="btn btn-success btn-sm">Restore</a>
-                        <a href="{{ $story->slug }}/deletebyOne" class="btn btn-danger btn-sm">Hapus</a>
+                        <a href="/story/{{ $story->id}}/restore" class="btn btn-success btn-sm">Restore</a>
+                        <a href="/story/{{ $story->id}}/deletebyOne" class="btn btn-danger btn-sm">Hapus</a>
                     </td>
                   </tr>
                   @empty 

@@ -25,11 +25,11 @@ Route::group(['prefix' => 'story' , 'middleware' => 'auth'], function () {
     Route::get('trash','StoryController@trash')->name('stories.trash');
 
     // restore
-    Route::get('{story:slug}/restore','StoryController@restore');
+    Route::get('{id}/restore','StoryController@restore');
     Route::get('restoreall','StoryController@restoreall');
 
     // hapus
-    Route::get('{story:slug}/deletebyOne','StoryController@deletebyOne');
+    Route::get('{id}/deletebyOne','StoryController@deletebyOne');
     Route::get('deleteall','StoryController@deleteall');
 });
 

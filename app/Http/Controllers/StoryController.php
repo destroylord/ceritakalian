@@ -112,9 +112,12 @@ class StoryController extends Controller
         return view('stories.trash', compact('stories','count'));
     }
 
-    public function restore(Story $story)
+    public function restore(Story $story, $id )
     {
-        dd($story);
+        $guru = Story::onlyTrashed()->where('id',$id);
+        $guru->restore();
+        
+        return back();
     }
 
     public function restoreall()
@@ -124,9 +127,11 @@ class StoryController extends Controller
 
         return back();
     }
-    public function deletebyOne(Story $story)
+    public function deletebyOne(Story $story, $id)
     {
-        dd($story);
+        $guru = Story::onlyTrashed()->where('id',$id);
+        $guru->forceDelete();
+        return back();
     }
     public function deleteall()
     {

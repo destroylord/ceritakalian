@@ -39,7 +39,7 @@ class RefreshDatabaseCommand extends Command
     {
         // action
         // di migrate baru di seed / migrate:refresh --seed sama saja seperti itu
-        $this->call('migrate:refresh');
+        $this->call('migrate:fresh');
 
         $this->call('db:seed');
 

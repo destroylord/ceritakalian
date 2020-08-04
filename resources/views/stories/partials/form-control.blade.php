@@ -9,14 +9,15 @@
             @enderror
         </div>
     </div>
-    {{-- <div class="form-group">
+    <div class="form-group">
         <label for="inputAddress">Category</label>
-        <select name="" id="" class="form-control">
+        <select name="category" id="category" class="form-control">
             <option selected disabled>Pilih salah satu</option>
-            <option value="">Horror</option>
-            <option value="">Aktifitas</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
         </select>
-    </div> --}}
+    </div>
     {{-- <div class="form-group">
     <label for="tag">Tags</label>
         <select class="select2 form-control" name="tags[]" multiple="multiple">

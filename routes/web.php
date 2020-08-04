@@ -40,6 +40,9 @@ Route::patch('setting/profil','UserController@update');
 Route::get('setting/change-password','UserController@changePasswordForm')->name('setting.password');
 Route::post('setting/changes-password','UserController@changePassword');
 
+// filtering dari kategori
+Route::get('categories/{category:slug}','CategoryController@show');
+
 
 
 Route::get('/', function () {

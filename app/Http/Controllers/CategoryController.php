@@ -46,7 +46,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $stories = $category->stories()->paginate(6);
+        return view('stories.index', compact('stories','category'));
     }
 
     /**

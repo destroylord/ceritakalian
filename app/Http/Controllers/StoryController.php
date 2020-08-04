@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Story;
 use App\Http\Requests\StoryRequest;
 use Illuminate\Http\Request;
@@ -29,7 +30,10 @@ class StoryController extends Controller
     public function create()
     {
         //
-        return view('stories.create', ['story' => New Story]);
+        return view('stories.create', [
+            'story' => New Story,
+            'categories' => Category::get()
+        ]);
        
     }
 
@@ -42,9 +46,9 @@ class StoryController extends Controller
     public function store(StoryRequest $request)
     {
         $attr = $request->all();
-
         // this is code clean boy
         $attr['slug'] = \Str::slug(request('title'));
+        $attr['category_id'] = request('category');
         Story::create($attr);
 
         return redirect('/story/my-stories')->with('success','Tambah cerita Berhasil');

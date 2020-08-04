@@ -12,7 +12,15 @@
         <div class="col-md-10">
             <a href="{{ route('stories.create') }}" class="btn btn-sm btn-primary">Tambah Cerita</a>
             
-
+            @isset($category)
+            <h4 class="py-3">
+                Category : {{ $category->name }}
+            </h4>                
+            @else
+            <h4 class="py-3">
+                All Story
+            </h4>
+            @endisset
             <div class="row mt-3">
                 @forelse ($stories as $story)
                 <div class="col-md-4 mt-2">

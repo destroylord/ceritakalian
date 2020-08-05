@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Story;
 use App\Http\Requests\StoryRequest;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
@@ -32,7 +33,8 @@ class StoryController extends Controller
         //
         return view('stories.create', [
             'story' => New Story,
-            'categories' => Category::get()
+            'categories' => Category::get(),
+            'tags' => Tag::get()
         ]);
        
     }

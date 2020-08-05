@@ -42,6 +42,8 @@ Route::post('setting/changes-password','UserController@changePassword');
 
 // filtering dari kategori
 Route::get('categories/{category:slug}','CategoryController@show');
+// filtering setiap tags
+Route::get('tags/{tag:slug}','TagController@show');
 
 
 

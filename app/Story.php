@@ -16,4 +16,8 @@ class Story extends Model
     {
         return $this->BelongsTo(Category::class);
     }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

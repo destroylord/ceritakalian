@@ -47,6 +47,8 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
         //
+        $stories = $tag->stories()->paginate(6);
+        return view('stories.index', compact('stories','tag'));
     }
 
     /**

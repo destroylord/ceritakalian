@@ -11,6 +11,10 @@
                     </div>
                     <div class="card-body">
                       <a href="/categories/{{ $story->category->slug }}">{{ $story->category->name }}</a>
+                      &middot;
+                      @foreach ($story->tags as $tag)
+                          <a href="#">{{ $tag->name }}</a>
+                      @endforeach
                       <h6 class="card-subtitle mb-2 text-muted">{{ $story->created_at->format('d F Y') }}</h6>
                       <p class="card-text">{!! $story->body !!}</p>
                     </div>

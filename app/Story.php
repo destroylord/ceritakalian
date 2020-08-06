@@ -10,7 +10,7 @@ class Story extends Model
 {
     use SoftDeletes;
     //
-    protected $fillable = ['title','category_id','slug','body'];
+    protected $fillable = ['title','category_id','slug','body','thumbnail'];
 
     public function category()
     {
@@ -23,5 +23,9 @@ class Story extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function getTakeImageAttribute()
+    {
+        return "/storage/". $this->thumbnail;
     }
 }

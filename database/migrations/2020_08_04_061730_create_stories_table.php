@@ -18,6 +18,7 @@ class CreateStoriesTable extends Migration
             $table->string('title');
             $table->foreignId('user_id');
             $table->unsignedInteger('category_id');
+            $table->string('thumbnail');
             $table->string('slug');
             $table->text('body');
             $table->timestamps();

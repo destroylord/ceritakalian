@@ -53,8 +53,8 @@
         <button type="submit" class="btn btn-primary btn-block">{{ $submit ?? 'update' }}</button>
     </div>
     <div class="col-md-3">
-    {{-- <div class="form-group">
-    <label for="">Thumbnail</label>
-    <input id="" class="form-control" type="file" name="">
-    </div> --}}
+        <div class="form-group">
+        <label for="">Thumbnail</label>
+        <input id="" class="form-control" type="file" name="thumbnail">
+    </div>
     </div>

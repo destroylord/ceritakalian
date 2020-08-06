@@ -12,7 +12,7 @@
             
             <div class="row ">
                 <div class="col-md-9">
-                    <form action="/story/store" method="POST">
+                    <form action="/story/store" method="POST" enctype="multipart/form-data">
                         @csrf
                         @include('stories.partials.form-control', ['submit' => 'Post'])
                     </form>

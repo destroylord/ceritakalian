@@ -9,7 +9,7 @@
         <div class="col-md-10">            
             <div class="row ">
                 <div class="col-md-9">
-                    <form action="edit" method="POST">
+                    <form action="edit" method="POST" enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
                         <h4>Cerita : {{ $story->title }}</h4>

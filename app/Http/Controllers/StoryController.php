@@ -17,7 +17,7 @@ class StoryController extends Controller
     public function index(Story $story)
     {
         //
-        $stories = Story::latest()->paginate(6);
+        $stories = auth()->user()->stories()->latest()->paginate(6);
         return view('stories.index', compact('stories'));
     }
 
@@ -37,7 +37,7 @@ class StoryController extends Controller
        
     }
 
-    /**
+/**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,9 +46,18 @@ class StoryController extends Controller
     public function store(StoryRequest $request)
     {
         $attr = $request->all();
+
+        $thumbnail = request()->file('thumbnail');
+
+        $slug = \Str::slug(request('title'));
+        $attr['slug'] =$slug;
+
+        $thumbnailUrl = $thumbnail->storeAs("images/story","{$slug}.{$thumbnail->extension()}");
+        
         // this is code clean boy
-        $attr['slug'] = \Str::slug(request('title'));
         $attr['category_id'] = request('category');
+        $attr['thumbnail'] = $thumbnailUrl;
+        
         $story = auth()->user()->stories()->create($attr);
 
         $story->tags()->attach(request('tags'));

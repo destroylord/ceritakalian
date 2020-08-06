@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Story;
+use App\{Category, Story, Tag};
 use App\Http\Requests\StoryRequest;
-use App\Tag;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
@@ -51,7 +49,9 @@ class StoryController extends Controller
         // this is code clean boy
         $attr['slug'] = \Str::slug(request('title'));
         $attr['category_id'] = request('category');
-        Story::create($attr);
+        $story = Story::create($attr);
+
+        $story->tags()->attach(request('tags'));
 
         return redirect('/story/my-stories')->with('success','Tambah cerita Berhasil');
     }
@@ -77,7 +77,11 @@ class StoryController extends Controller
     public function edit(Story $story)
     {
         //
-        return view('stories.edit', compact('story'));
+        return view('stories.edit', [
+            'story'         => $story,
+            'categories'    => Category::get(),
+            'tags'          => Tag::get()
+        ]);
     }
 
     /**
@@ -94,6 +98,7 @@ class StoryController extends Controller
         // tidak harus mengupdate slug
 
         $story->update($attr);
+        $story->tags()->sync(request('tags'));
 
         return redirect('story/my-stories')->with('success','Ceritaku berhasil diupdate');
     }
@@ -136,14 +141,15 @@ class StoryController extends Controller
     public function deletebyOne(Story $story, $id)
     {
         $guru = Story::onlyTrashed()->where('id',$id);
+        $story->tags()->detach();
         $guru->forceDelete();
         return back();
     }
     public function deleteall()
     {
+        $story->tags()->detach();
         $story = Story::onlyTrashed();
         $story->forceDelete();
-
         return back()->with('warning','Semua cerita telah terhapus secara permanen');
     }
 }

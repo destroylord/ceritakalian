@@ -14,17 +14,31 @@
         <select name="category" id="category" class="form-control">
             <option selected disabled>Pilih salah satu</option>
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option {{ $category->id  == $story->category_id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
+        @error('category')
+        <small class="invalid-feedback">
+            {{ $message }}
+        </small>
+    @enderror
     </div>
-    {{-- <div class="form-group">
+    <div class="form-group">
     <label for="tag">Tags</label>
-        <select class="select2 form-control" name="tags[]" multiple="multiple">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
+        <select class="select2 form-control" name="tags[]" multiple>
+            @foreach ($story->tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+            @endforeach
+            @foreach ($tags as $tag)
+            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+        @endforeach
         </select>
-    </div> --}}
+      @error('tags')
+      <small class="invalid-feedback">
+          {{ $message }}
+      </small>
+  @enderror
+    </div>
     <div class="form">
         <div class="form-group ">
             <label for="inputCity">Ceritakan sedikit apa yang kalian pernah alami?</label>

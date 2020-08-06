@@ -40,4 +40,8 @@ class User extends Authenticatable
     {
         return view('auth.profile');
     }
+    public function stories()
+    {
+        return $this->hasMany(Story::class);
+    }
 }

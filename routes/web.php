@@ -1,5 +1,6 @@
 <?php
 
+use App\Story;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,8 +48,7 @@ Route::get('tags/{tag:slug}','TagController@show');
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','WelcomeController@index');
+Route::get('story/{story:slug}','WelcomeController@show');
 
 

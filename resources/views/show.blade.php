@@ -4,13 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ route('stories.index') }}" class="btn btn-danger btn-sm mb-2">Kembali</a>
+                <a href="/" class="btn btn-danger btn-sm mb-2">Kembali</a>
                 <div class="card">
                     <div class="card-header">
                       <h4>{{ $story->title }}</h4>
                     </div>
                     <div class="card-body">
-                        <p class="text-secondary">Write : {{ $story->user->name }}</p>
                       <a href="/categories/{{ $story->category->slug }}">{{ $story->category->name }}</a>
                       &middot;
                       @foreach ($story->tags as $tag)

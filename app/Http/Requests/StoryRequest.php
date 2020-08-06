@@ -26,7 +26,7 @@ class StoryRequest extends FormRequest
     {
         return [
             //
-            'title' => 'required|min:3',
+            'title' => 'required|min:3|max:15',
             'body'  => 'required'
         ];
     }

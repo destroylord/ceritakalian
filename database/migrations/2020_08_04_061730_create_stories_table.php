@@ -16,6 +16,7 @@ class CreateStoriesTable extends Migration
         Schema::create('stories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->foreignId('user_id');
             $table->unsignedInteger('category_id');
             $table->string('slug');
             $table->text('body');

@@ -14,7 +14,7 @@ class StoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Story $story)
     {
         //
         $stories = Story::latest()->paginate(6);
@@ -49,7 +49,7 @@ class StoryController extends Controller
         // this is code clean boy
         $attr['slug'] = \Str::slug(request('title'));
         $attr['category_id'] = request('category');
-        $story = Story::create($attr);
+        $story = auth()->user()->stories()->create($attr);
 
         $story->tags()->attach(request('tags'));
 
@@ -94,6 +94,7 @@ class StoryController extends Controller
     public function update(StoryRequest $request,  Story $story)
     {
 
+        $this->authorize('update', $story);
         $attr = $request->all();
         // tidak harus mengupdate slug
 
@@ -145,8 +146,9 @@ class StoryController extends Controller
         $guru->forceDelete();
         return back();
     }
-    public function deleteall()
+    public function deleteall(Story $story)
     {
+        $this->authorize('delete', $story);
         $story->tags()->detach();
         $story = Story::onlyTrashed();
         $story->forceDelete();

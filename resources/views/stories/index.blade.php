@@ -30,7 +30,7 @@
                 @can('view', $story)
                 <div class="col-md-4 mt-2">
                     <div class="card h-100">
-                        <img src="{{ $story->thumbnail }}" class="card-img-top" alt="">
+                        <img src="{{ $story->takeImage }}" class="card-img-top" alt="">
                         <div class="card-body">
                           <h5 class="card-title">{{ $story->title }}</h5>
                             <blockquote class="blockquote mb-0">

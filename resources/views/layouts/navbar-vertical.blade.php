@@ -24,7 +24,7 @@
         </li>
     </ul>
 </nav>
-<hr>
+{{-- <hr>
 <nav>
     <b>Lainnya</b>
     <ul class="nav flex-column">
@@ -32,4 +32,4 @@
             <a class="nav-link" href="#">wishlist</a>
         </li>
     </ul>
-</nav>
+</nav> --}}

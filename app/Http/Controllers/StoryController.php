@@ -45,7 +45,9 @@ class StoryController extends Controller
      */
     public function store(StoryRequest $request)
     {
-        $attr = $request->all();
+        $request->validate([
+            'thumbnail' => 'image|mimes:jpeg,jpg,png,svg|max:2048s'
+        ]);
 
         $thumbnail = request()->file('thumbnail');
 
@@ -53,6 +55,8 @@ class StoryController extends Controller
         $attr['slug'] =$slug;
 
         $thumbnailUrl = $thumbnail->storeAs("images/story","{$slug}.{$thumbnail->extension()}");
+        
+        $gambar = $thumbnail ? $thumbnailUrl : null;
         
         // this is code clean boy
         $attr['category_id'] = request('category');
@@ -102,10 +106,23 @@ class StoryController extends Controller
      */
     public function update(StoryRequest $request,  Story $story)
     {
-
+        $request->validate([
+            'thumbnail' => 'image|mimes:jpeg,jpg,png,svg|max:2048s'
+        ]);
         $this->authorize('update', $story);
+        if (request()->file('thumbnail')) {
+            \Storage::delete($story->thumbnail);
+            $thumbnail = request()->file('thumbnail')->store("images/story");
+        } else {
+            $thumbnail = $story->thumbail;
+        }
+        
+
         $attr = $request->all();
         // tidak harus mengupdate slug
+
+        $attr['category_id'] = request('category');
+        $attr['thumbnail'] = $thumbnail;
 
         $story->update($attr);
         $story->tags()->sync(request('tags'));
@@ -158,6 +175,7 @@ class StoryController extends Controller
     public function deleteall(Story $story)
     {
         $this->authorize('delete', $story);
+        \Storage::delete($story->thumbnail);
         $story->tags()->detach();
         $story = Story::onlyTrashed();
         $story->forceDelete();

@@ -7,7 +7,9 @@
             <div class="col-md-8">
                 @foreach ($terbaru as $new)
                     <div class="card mb-3">
-                        {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                        @if ($new->takeImage)
+                            <img src="{{ $new->takeImage }}" class="card-img-top" alt="...">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title"><a class="text-body" href="/story/{{ $new->slug }}"> {{ $new->title }} </a></h5>
                             <a href="/categories/{{ $new->category->slug }}">{{ $new->category->name }}</a>

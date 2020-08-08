@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
 // Master
@@ -46,9 +46,10 @@ Route::get('categories/{category:slug}','CategoryController@show');
 // filtering setiap tags
 Route::get('tags/{tag:slug}','TagController@show');
 
-
-
 Route::get('/','WelcomeController@index');
 Route::get('story/{story:slug}','WelcomeController@show');
+
+// email
+// Route::get('/kirim-email','EmailController@index');
 
 

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','name', 'email', 'password',
+        'username','name', 'email', 'password','email_verified_at'
     ];
 
     /**
@@ -44,4 +44,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Story::class);
     }
+    // public function getTakeImageAttribute()
+    // {
+    //     return "/avatar/". $this->avatar;
+    // }
 }

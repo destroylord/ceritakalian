@@ -44,8 +44,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Story::class);
     }
-    // public function getTakeImageAttribute()
-    // {
-    //     return "/avatar/". $this->avatar;
-    // }
+    public function getTakeImageAttribute()
+    {
+        return "/storage/". $this->avatar;
+    }
 }

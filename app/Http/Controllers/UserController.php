@@ -17,16 +17,10 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public function show(User $user)
-    {
-
-    }
-
     public function edit(User $user)
     {
         //
-        return view('auth.profile');
+        return view('auth.profile', compact('user'));
     }
 
     /**

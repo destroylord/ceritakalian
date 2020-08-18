@@ -48,6 +48,8 @@ class StoryController extends Controller
         $request->validate([
             'thumbnail' => 'image|mimes:jpeg,jpg,png,svg|max:2048s'
         ]);
+        
+        $attr = $request->all();
 
         $thumbnail = request()->file('thumbnail');
 

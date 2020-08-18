@@ -11,6 +11,7 @@
                 <div class="container">
                   <h1 class="display-4">Selamat Datang</h1>
                   <p class="lead">Silahkan mengisi cerita anda bisa langsung klik <a href="{{ route('stories.index') }}"> disini.</a></p>
+                  <img src="{{ Auth::user()->takeImage }}" alt="">
                 </div>
               </div>
         </div>

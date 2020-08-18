@@ -23,7 +23,7 @@
                                 </small>
                             @enderror
                         </div>
-                        <img src="{{ $avatar->avatar }}" alt="">
+
                         <div class="form-group">
                           <label for="exampleInputEmail1">Email address</label>
                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ Auth::user()->email }}" readonly>
